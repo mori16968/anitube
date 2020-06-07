@@ -1,0 +1,6 @@
+h1 Users#index
+- @users.each do |user|
+  hr
+  h3
+    span ユーザーネーム
+    = link_to user.name, user_path(user.id)
