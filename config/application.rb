@@ -12,6 +12,8 @@ module Myapp
     config.load_defaults 5.2
     config.generators.template_engine = :slim
 
+    config.i18n.default_locale = :ja
+
     config.time_zone = 'Tokyo'
     config.generators do |g|
       g.test_framework :rspec,
