@@ -1,5 +1,9 @@
-h1 Users#show
+h1 
+  = @user.name
 
 hr
-h3
-  span ユーザーネーム = @user.name
+
+h4 タイトル
+- @posts.each do |post|
+  hr
+  = link_to post.title, post_path(post.id)
