@@ -3,7 +3,12 @@ h1
 
 hr
 
-h4 タイトル
+h4 投稿
 - @posts.each do |post|
+  hr
+  = link_to post.title, post_path(post.id)
+hr
+h4 いいねした投稿
+- @favorite_posts.each do |post|
   hr
   = link_to post.title, post_path(post.id)

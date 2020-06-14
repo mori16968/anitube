@@ -4,3 +4,14 @@ p
   = @post.body
 p
   = @post.user.name
+hr
+h2 コメント
+- if user_signed_in?
+  = form_for [@post, @comment], method: :post do |f|
+    = f.text_field :body
+    = f.submit
+h2 コメント一覧
+- if user_signed_in?
+  - @comments.each do |comment|
+    = comment.body
+    hr
