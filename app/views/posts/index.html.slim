@@ -6,6 +6,7 @@ h1 投稿一覧
     = link_to post.title, post_path(post.id)
   p
     = link_to post.user.name, user_path(post.user.id)
+
   - if user_signed_in?
     - if post.favorited_by?(current_user)
       p いいね済み
@@ -13,6 +14,16 @@ h1 投稿一覧
     - else
       p いいねする
       = link_to post.favorites.count, post_favorites_path(post.id), method: :post
+    
+    - if current_user != post.user
+      - if post.user.followed_by?(current_user)
+        p 
+          = link_to "フォロー済み", user_relationships_path(post.user.id), method: :delete
+      - else
+        p
+          = link_to "フォロー", user_relationships_path(post.user.id), method: :post
+          
+
   - else
     p
       いいね数 
