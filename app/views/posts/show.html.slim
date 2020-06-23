@@ -1,6 +1,11 @@
 h1 = @post.title
-- if current_user == @post.user
-  = link_to "削除", post_path, method: :delete
+
+
+iframe src="https://www.youtube.com/embed/#{@post.youtube_url}" frameborder="0" width="560" height="310"
+
+p 
+  - if current_user == @post.user
+    = link_to "削除", post_path, method: :delete
 
 p
   = @post.body

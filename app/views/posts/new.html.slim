@@ -2,6 +2,10 @@ h1 新規投稿
 
 = form_for @post do |f|
   p
+    = f.label :youtube_url, "動画URL"
+    br
+    = f.text_field :youtube_url
+  p
     = f.label :title, "作品名"
     br
     = f.text_field :title

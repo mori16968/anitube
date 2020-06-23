@@ -17,6 +17,9 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    url = params[:post][:youtube_url]
+    url = url.last(11)
+    @post.youtube_url = url
     @post.save
     redirect_to posts_path
   end
