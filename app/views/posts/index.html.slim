@@ -22,9 +22,6 @@ h1 投稿一覧
       - else
         p
           = link_to "フォロー", user_relationships_path(post.user.id), method: :post
-          
-
   - else
-    p
-      いいね数 
-    = post.favorites.count
+  p  いいね数 
+  = post.favorites.count
