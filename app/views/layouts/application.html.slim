@@ -11,6 +11,7 @@ html
     - if user_signed_in?
       = link_to "投稿する", new_post_path
       = link_to "マイページ", user_path(current_user.id)
+      = link_to "通知", notifications_path
       = link_to "ログアウト", destroy_user_session_path, method: :delete
     - else
       = link_to "新規登録", new_user_registration_path

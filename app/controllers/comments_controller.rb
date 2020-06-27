@@ -3,8 +3,12 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = current_user.comments.build(comment_params)
     @comment.post_id = @post.id
-    @comment.save
-    redirect_back(fallback_location: root_url)
+    if @comment.save
+      @post.create_notification_comment(current_user, @comment.id)
+      redirect_back(fallback_location: root_url)
+    else
+      render 'posts/show'
+    end
   end
 
   def destroy
