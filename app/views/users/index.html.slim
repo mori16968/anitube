@@ -2,7 +2,7 @@ h1 Users#index
 - @users.each do |user|
   hr
   h3
-    span ユーザーネーム
+    = image_tag user.avatar.variant(resize:'80x80').processed if user.avatar.attached?
     = link_to user.name, user_path(user.id)
   - if current_user != user
     - if user.followed_by?(current_user)

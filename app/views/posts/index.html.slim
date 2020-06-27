@@ -5,6 +5,7 @@ h1 投稿一覧
   h2
     = link_to post.title, post_path(post.id)
   p
+    = image_tag post.user.avatar.variant(resize:'30x30').processed if post.user.avatar.attached?
     = link_to post.user.name, user_path(post.user.id)
 
   - if user_signed_in?
