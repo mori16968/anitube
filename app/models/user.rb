@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 30 }
   before_create :default_avatar
 
   devise :database_authenticatable, :registerable,

@@ -11,6 +11,11 @@ RSpec.describe User, type: :model do
     expect(user).not_to be_valid
   end
 
+  it "nameが31文字以上なら無効であること" do
+    user = build(:user, name: "a" * 31 )
+    expect(user).not_to be_valid
+  end
+
   it "emailが無ければ無効であること" do
     user = build(:user, email: nil)
     expect(user).not_to be_valid
