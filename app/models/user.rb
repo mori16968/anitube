@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   validates :name, presence: true
+  before_create :default_avatar
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -17,5 +18,11 @@ class User < ApplicationRecord
 
   def followed_by?(user)
     passive_relationships.find_by(following_id: user.id).present?
+  end
+
+  def default_avatar
+    if !self.avatar.attached?
+      self.avatar.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'default.png')), filename: 'default.png', content_type: 'image/png')
+    end
   end
 end

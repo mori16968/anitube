@@ -1,5 +1,5 @@
 h1
-  = image_tag @user.avatar.variant(resize:'80x80').processed if @user.avatar.attached?
+  = image_tag @user.avatar.variant(resize:'80x80').processed
   = @user.name
 - if current_user == @user
   h3 

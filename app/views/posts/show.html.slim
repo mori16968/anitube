@@ -10,7 +10,7 @@ p
 p
   = @post.body
 p
-  = image_tag @post.user.avatar.variant(resize:'80x80').processed if @post.user.avatar.attached?
+  = image_tag @post.user.avatar.variant(resize:'80x80').processed
   = @post.user.name
 - if current_user != @post.user
     - if @post.user.followed_by?(current_user)
