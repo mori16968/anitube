@@ -2,7 +2,8 @@ class RelationshipsController < ApplicationController
   def create
     follow = current_user.active_relationships.build(follower_id: params[:user_id])
     follow.save
-    # フォロー通知未実装
+    #user = User.find(params[:follower_id])
+    #user.create_notification_follow(current_user)
     redirect_back(fallback_location: root_url)
   end
 

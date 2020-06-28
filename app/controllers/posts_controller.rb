@@ -21,9 +21,9 @@ class PostsController < ApplicationController
     url = url.last(11)
     @post.youtube_url = url
     if @post.save
-      redirect_to posts_path 
+      redirect_to posts_path
     else
-      render 'posts/new' 
+      render 'posts/new'
     end
   end
 
