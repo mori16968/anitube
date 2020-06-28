@@ -1,0 +1,14 @@
+- @user ||= current_user
+.stats
+  a href="#{follows_user_path(@user)}"
+    strong
+      #followings
+        .stat
+          = @user.followings.count
+    p フォロー
+  a href="#{followers_user_path(@user)}" 
+    strong
+      #followers
+        .stat
+          = @user.followers.count
+    p フォロワー

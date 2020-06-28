@@ -28,8 +28,16 @@ class User < ApplicationRecord
            foreign_key: "visited_id",
            dependent: :destroy
 
-  def followed_by?(user)
-    passive_relationships.find_by(following_id: user.id).present?
+  def follow(other_user)
+    followings << other_user
+  end
+
+  def unfollow(other_user)
+    active_relationships.find_by(follower_id: other_user.id).destroy
+  end
+
+  def following?(other_user)
+    followings.include?(other_user)
   end
 
   def default_avatar

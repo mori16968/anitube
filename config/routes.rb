@@ -6,9 +6,9 @@ Rails.application.routes.draw do
     resource :comments, only: [:create, :destroy]
   end
   resources :users do
-    resource :relationships, only: [:create, :destroy]
     get :follows, on: :member
     get :followers, on: :member
   end
+  resources :relationships, only: [:create, :destroy]
   resources :notifications, only: :index
 end

@@ -15,14 +15,6 @@ h1 投稿一覧
     - else
       p
         = link_to "いいねする", post_favorites_path(post.id), method: :post
-    
-    - if current_user != post.user
-      - if post.user.followed_by?(current_user)
-        p 
-          = link_to "フォロー済み", user_relationships_path(post.user.id), method: :delete
-      - else
-        p
-          = link_to "フォロー", user_relationships_path(post.user.id), method: :post
   - else
     p  いいね数 
     = post.favorites.count
