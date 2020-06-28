@@ -1,17 +1,15 @@
 h1 新規投稿
 
 = form_for @post do |f|
-  p
+  = render 'shared/error_messages'
+  .form-group
     = f.label :youtube_url, "動画URL"
-    br
-    = f.text_field :youtube_url
-  p
-    = f.label :title, "作品名"
-    br
-    = f.text_field :title
-  p
-    = f.label :body, "投稿"
-    br
-    = f.text_area :body
-
-  = f.submit
+    = f.text_field :youtube_url, autofocus: true, class: 'form-control'
+  .form-group
+    = f.label :title, "タイトル"
+    = f.text_field :title, class: 'form-control'
+  .form-group
+    = f.label :body, "本文"
+    = f.text_area :body, class: 'form-control'
+  .form-group
+    = f.submit '投稿', class: 'btn btn-primary'

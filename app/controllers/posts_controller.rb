@@ -20,8 +20,11 @@ class PostsController < ApplicationController
     url = params[:post][:youtube_url]
     url = url.last(11)
     @post.youtube_url = url
-    @post.save
-    redirect_to posts_path
+    if @post.save
+      redirect_to posts_path 
+    else
+      render 'posts/new' 
+    end
   end
 
   def destroy

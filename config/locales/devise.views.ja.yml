@@ -26,6 +26,10 @@ ja:
         unconfirmed_email: 未確認Eメール
         unlock_token: ロック解除用トークン
         updated_at: 更新日
+      post:
+        youtube_url: 動画URL
+        title: タイトル
+        body: 本文
     models:
       user: ユーザ
   devise:
