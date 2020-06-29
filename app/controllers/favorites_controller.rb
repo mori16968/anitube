@@ -1,17 +1,26 @@
 class FavoritesController < ApplicationController
   before_action :authenticate_user!
-  
+
   def create
-    favorite = current_user.favorites.build(post_id: params[:post_id])
-    favorite.save
-    post = Post.find(params[:post_id])
-    post.create_notification_favorite(current_user)
-    redirect_to posts_path
+    @post = Post.find(params[:post_id])
+    unless @post.favorite?(current_user)
+      @post.favorite(current_user)
+      @post.create_notification_favorite(current_user)
+      respond_to do |format|
+        format.html { redirect_to request.referrer || root_url }
+        format.js
+      end
+    end
   end
 
   def destroy
-    favorite = Favorite.find_by(post_id: params[:post_id], user_id: current_user.id)
-    favorite.destroy
-    redirect_to posts_path
+    @post = Favorite.find(params[:id]).post
+    if @post.favorite?(current_user)
+      @post.cancel_favorite(current_user)
+      respond_to do |format|
+        format.html { redirect_to request.referrer || root_url }
+        format.js
+      end
+    end
   end
 end

@@ -1,5 +1,10 @@
 h1 = @post.title
 
+p
+  = image_tag @post.user.avatar.variant(resize:'80x80').processed
+  = @post.user.name
+
+= render 'favorite_form'
 
 iframe src="https://www.youtube.com/embed/#{@post.youtube_url}" frameborder="0" width="560" height="310"
 
@@ -9,9 +14,7 @@ p
 
 p
   = @post.body
-p
-  = image_tag @post.user.avatar.variant(resize:'80x80').processed
-  = @post.user.name
+
 h2 コメント
 - if user_signed_in?
   = form_for [@post, @comment], method: :post do |f|
