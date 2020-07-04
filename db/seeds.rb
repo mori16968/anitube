@@ -1,4 +1,4 @@
-30.times do |n|
+10.times do |n|
   name = Faker::Name.name
   email = "test#{n + 1}@test.com"
   password = "password"
