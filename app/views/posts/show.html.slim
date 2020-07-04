@@ -1,0 +1,32 @@
+h1 = @post.title
+
+p
+  = image_tag @post.user.avatar.variant(resize:'80x80').processed
+  = @post.user.name
+
+= render 'favorite_form'
+
+iframe src="https://www.youtube.com/embed/#{@post.youtube_url}" frameborder="0" width="560" height="310"
+
+p 
+  - if current_user == @post.user
+    = link_to "削除", post_path, method: :delete
+
+p
+  = @post.body
+
+h2 コメント
+- if user_signed_in?
+  = form_for [@post, @comment], method: :post do |f|
+    = f.text_field :body
+    = f.submit
+h2 コメント一覧
+- if user_signed_in?
+  - @comments.each do |comment|
+    = comment.body
+    br
+    span by
+    = link_to comment.user.name, user_path(comment.user.id)
+    -if current_user == comment.user
+      = link_to "削除", post_comments_path(comment.id), method: :delete
+    hr

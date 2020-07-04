@@ -1,0 +1,2 @@
+= form_for(@post.favorites.find_by(user_id: current_user.id), method: :delete, remote: true) do |f|
+  = f.submit "いいね済", class: "btn"

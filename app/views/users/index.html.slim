@@ -1,0 +1,6 @@
+h1 Users#index
+- @users.each do |user|
+  hr
+  h3
+    = image_tag user.avatar.variant(resize:'80x80').processed
+    = link_to user.name, user_path(user.id)

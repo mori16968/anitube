@@ -28,7 +28,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
+gem 'mini_magick', '~> 4.8'
+gem 'aws-sdk-s3', require: false
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -36,9 +37,23 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+gem 'slim-rails'
+gem 'html2slim'
+gem 'rubocop-airbnb'
+gem 'bootstrap', '~> 4.1.1'
+gem 'jquery-rails'
+gem 'rails-i18n', '~> 5.1'
+gem 'devise'
+gem 'devise-i18n'
+gem 'devise-bootstrap-views', '~> 1.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'pry-rails'
+  gem 'pry-byebug'
 end
 
 group :development do
