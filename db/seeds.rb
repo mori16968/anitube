@@ -50,3 +50,11 @@ posts.each do |post|
     post.favorite(user) unless user.id == post.user_id
   end
 end
+
+# コメント
+CSV.foreach('db/csv/comment.csv', headers: true) do |row|
+  user_id = row[0]
+  post_id = row[1]
+  body = row[2]
+  Comment.create!(user_id: user_id, post_id: post_id, body: body)
+end

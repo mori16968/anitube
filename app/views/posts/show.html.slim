@@ -22,17 +22,19 @@ h2 コメント
     = f.text_field :body
     = f.submit
 h2 コメント一覧
-- if user_signed_in?
-  - @comments.each do |comment|
-    = comment.body
-    br
-    span by
-    = link_to comment.user.name, user_path(comment.user.id)
-    -if current_user == comment.user
-      = link_to "削除", post_comment_path(comment.post.id, comment.id), method: :delete
-    hr
+- @comments.each do |comment|
+  = comment.body
+  br
+  span by
+  = link_to comment.user.name, user_path(comment.user.id)
+  -if current_user == comment.user
+    = link_to "削除", post_comment_path(comment.post.id, comment.id), method: :delete
+  hr
 
 h2 いいねしたユーザー
-- @favorites.each do |favorite|
-  = link_to favorite.user.name, user_path(favorite.user.id)
-  hr
+- if @post.favorite_users.exists?
+  - @post.favorite_users.each do |user|
+    = link_to user.name, user_path(user.id)
+    hr
+- else
+  いいねはまだありません
