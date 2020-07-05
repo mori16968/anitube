@@ -41,3 +41,12 @@ i = 0
   end
   i += 1
 end
+
+# お気に入り
+users = User.order(:id).take(8)
+posts = Post.order(:id).take(15)
+posts.each do |post|
+  users.each do |user|
+    post.favorite(user) unless user.id == post.user_id
+  end
+end
