@@ -144,4 +144,3 @@ ja:
       not_locked: は凍結されていません。
       not_saved:
         one: エラーが発生したため %{resource} は保存されませんでした。
-        other: 未入力の項目があります。
