@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Signup", type: :system, js: true do
+RSpec.describe "Signup", type: :system do
 
   let!(:user) do
      create(:user,
@@ -31,6 +31,10 @@ RSpec.describe "Signup", type: :system, js: true do
 
       expect(current_path).to eq root_path
       expect(page).to have_content 'アカウント登録が完了しました。'
+      expect(page).to have_selector 'header', text: '投稿する'
+      expect(page).to have_selector 'header', text: 'マイページ'
+      expect(page).to have_selector 'header', text: '通知'
+      expect(page).to have_selector 'header', text: 'ログアウト'
     end
   end
 
@@ -45,7 +49,7 @@ RSpec.describe "Signup", type: :system, js: true do
       click_button 'アカウント登録'
 
       expect(page).to have_content 'ユーザー名は12文字以内で入力してください'
-      expect(page).to have_content 'Eメールはすでに存在します'
+      expect(page).to have_content 'メールアドレスはすでに存在します'
       expect(page).to have_content 'パスワード（確認用）とパスワードの入力が一致しません'
       expect(page).to have_content 'パスワードは6文字以上で入力してください'
     end
