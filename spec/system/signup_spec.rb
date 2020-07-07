@@ -23,10 +23,10 @@ RSpec.describe "Signup", type: :system do
     it "ユーザーの新規作成が成功すること" do
       visit new_user_registration_path
 
-      fill_in 'ユーザー名(12文字以内)', with: 'yamada'
-      fill_in 'メールアドレス', with: 'yamada@example.com'
-      fill_in 'パスワード', with: 'yamayamada'
-      fill_in 'パスワード（確認用）', with: 'yamayamada'
+      fill_in 'ユーザー名(12文字以内)', with: 'Alice'
+      fill_in 'メールアドレス', with: 'Alice@example.com'
+      fill_in 'パスワード', with: 'pass_alice'
+      fill_in 'パスワード（確認用）', with: 'pass_alice'
       click_button 'アカウント登録'
 
       expect(current_path).to eq root_path
@@ -44,8 +44,8 @@ RSpec.describe "Signup", type: :system do
 
       fill_in 'ユーザー名(12文字以内)', with: 'a' * 13
       fill_in 'メールアドレス', with: 'test_user@exemple.com'
-      fill_in 'パスワード', with: 'yama'
-      fill_in 'パスワード（確認用）', with: 'kawa'
+      fill_in 'パスワード', with: 'alice'
+      fill_in 'パスワード（確認用）', with: 'bob'
       click_button 'アカウント登録'
 
       expect(page).to have_content 'ユーザー名は12文字以内で入力してください'
