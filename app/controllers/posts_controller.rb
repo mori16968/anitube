@@ -17,9 +17,6 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    url = params[:post][:youtube_url]
-    url = url.last(11)
-    @post.youtube_url = url
     if @post.save
       redirect_to posts_path
     else
@@ -35,9 +32,19 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    post = Post.find(params[:id])
+    post.update!(post_params)
+    redirect_to post_path(post.id)
+  end
+
   private
 
   def post_params
-    params.require(:post).permit(:body, :title)
+    params.require(:post).permit(:body, :title, :youtube_url)
   end
 end
