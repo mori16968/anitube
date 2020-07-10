@@ -1,13 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Sessions", type: :system do
-  let!(:user) do
-    create(:user,
-      name: "test_user",
-      email: "test_user@exemple.com",
-      password: "password",
-      password_confirmation: "password")
-  end
+  let!(:user) { create(:user) }
 
   it "ログインページにアクセスできること" do
     visit root_path
@@ -18,11 +12,7 @@ RSpec.describe "Sessions", type: :system do
 
   context "フォームの入力値が有効な場合" do
     it "ログインが成功し、ログアウトが可能になること" do
-      visit new_user_session_path
-
-      fill_in 'メールアドレス', with: user.email
-      fill_in 'パスワード', with: user.password
-      click_button 'ログイン'
+      log_in(user)
 
       expect(page).to have_content 'ログインしました。'
       expect(page).to have_selector 'header', text: '投稿する'

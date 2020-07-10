@@ -2,6 +2,7 @@ ja:
   activerecord:
     attributes:
       user:
+        avatar: プロフィール画像
         name: ユーザー名
         confirmation_sent_at: パスワード確認送信時刻
         confirmation_token: パスワード確認用トークン

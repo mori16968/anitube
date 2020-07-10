@@ -2,13 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Signup", type: :system do
 
-  let!(:user) do
-     create(:user,
-       name: "test_user",
-       email: "test_user@exemple.com",
-       password: "password",
-       password_confirmation: "password")
-  end
+  let!(:user) { create(:user) }
 
   it "新規登録ページにアクセスできること" do
     visit root_path
@@ -43,7 +37,7 @@ RSpec.describe "Signup", type: :system do
       visit new_user_registration_path
 
       fill_in 'ユーザー名(12文字以内)', with: 'a' * 13
-      fill_in 'メールアドレス', with: 'test_user@exemple.com'
+      fill_in 'メールアドレス', with: user.email
       fill_in 'パスワード', with: 'alice'
       fill_in 'パスワード（確認用）', with: 'bob'
       click_button 'アカウント登録'
