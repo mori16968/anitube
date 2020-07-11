@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Signup", type: :system do
-
   let!(:user) { create(:user) }
 
   it "新規登録ページにアクセスできること" do
@@ -13,7 +12,6 @@ RSpec.describe "Signup", type: :system do
   end
 
   context "フォームの入力値が有効な場合" do
-
     it "ユーザーの新規作成が成功すること" do
       visit new_user_registration_path
 

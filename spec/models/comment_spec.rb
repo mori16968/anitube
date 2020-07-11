@@ -11,7 +11,7 @@ RSpec.describe Comment, type: :model do
     comment.user_id = nil
     expect(comment).not_to be_valid
   end
-  
+
   it "post_idが存在しないコメントは無効であること" do
     comment.post_id = nil
     expect(comment).not_to be_valid

@@ -4,11 +4,13 @@ RSpec.describe "Comments", type: :system do
   let(:user) { create(:user) }
   let!(:post) { create(:post) }
 
-  it "コメントを作成、削除できること" do
+  before do
     log_in(user)
     click_link '投稿一覧'
     click_link post.title
+  end
 
+  it "コメントを作成、削除できること" do
     # コメント投稿
     fill_in 'コメント', with: 'こんにちは'
     click_button 'コメントする'
@@ -20,14 +22,10 @@ RSpec.describe "Comments", type: :system do
       click_link '削除'
     end
 
-    expect(page).to_not have_content 'こんにちは'
+    expect(page).not_to have_content 'こんにちは'
   end
 
   xit "141字以上のコメントは投稿できないこと" do
-    log_in(user)
-    click_link '投稿一覧'
-    click_link post.title
-
     fill_in 'コメント', with: 'a' * 141
     click_button 'コメントする'
 
