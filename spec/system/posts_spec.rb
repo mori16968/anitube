@@ -44,13 +44,13 @@ RSpec.describe "Posts", js: true, type: :system do
   
       # 削除
       page.accept_confirm do
-        click_on '削除'
+        click_link '削除'
       end
-      aggregate_failures do
-        expect(current_path).to eq posts_path
-        expect(page).to_not have_content 'リゼロ二期'
-        expect(Post.where(id: post.id)).to be_empty
-      end
+
+      expect(current_path).to eq posts_path
+      expect(page).to_not have_content 'リゼロ二期'
+      expect(Post.where(id: post.id)).to be_empty
+
     end
   
     it "無効な入力値だと投稿の作成に失敗すること" do
