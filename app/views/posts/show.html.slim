@@ -11,7 +11,7 @@ iframe src="https://www.youtube.com/embed/#{@post.youtube_url.last(11)}" framebo
 
 p 
   - if current_user == @post.user
-    = link_to "削除", post_path, method: :delete, data: { confirm: "本当に削除しますか？" }
+    = link_to "削除", post_path, method: :delete, data: { confirm: "投稿を削除しますか？" }
     = link_to "編集", edit_post_path(@post)
 
 p
@@ -29,7 +29,7 @@ h2 コメント一覧
   span by
   = link_to comment.user.name, user_path(comment.user.id)
   -if current_user == comment.user
-    = link_to "削除", post_comment_path(comment.post.id, comment.id), method: :delete
+    = link_to "削除", post_comment_path(comment.post.id, comment.id), method: :delete, data: { confirm: "コメントを削除しますか？" }
   hr
 
 h2 いいねしたユーザー
