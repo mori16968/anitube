@@ -1,0 +1,15 @@
+h2 コメント
+= render 'shared/error_messages'
+- if user_signed_in?
+  = form_for [post, comment], method: :post do |f|
+    = f.text_field :body
+    = f.submit
+h2 コメント一覧
+- comments.each do |comment|
+  = comment.body
+  br
+  span by
+  = link_to comment.user.name, user_path(comment.user.id)
+  -if current_user == comment.user
+    = link_to "削除", post_comment_path(comment.post.id, comment.id), method: :delete, data: { confirm: "コメントを削除しますか？" }
+  hr
