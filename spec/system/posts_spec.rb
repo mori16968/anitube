@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Posts", type: :system do
+RSpec.describe "Posts", js: true, type: :system do
   let!(:user) { create(:user) }
 
   describe "ログインしたユーザーが投稿を作成、編集、削除する" do
@@ -43,7 +43,9 @@ RSpec.describe "Posts", type: :system do
       expect(page).to_not have_content 'とても楽しみ'
   
       # 削除
-      click_link '削除'
+      page.accept_confirm do
+        click_on '削除'
+      end
       aggregate_failures do
         expect(current_path).to eq posts_path
         expect(page).to_not have_content 'リゼロ二期'
