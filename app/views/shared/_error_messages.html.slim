@@ -1,7 +1,7 @@
-- if @post.errors.any?
+- if object.errors.any?
   #error_explanation
     .alert.alert-danger
       p 無効な項目があります
     ul
-      - @post.errors.full_messages.each do |msg|
+      - object.errors.full_messages.each do |msg|
         li = msg

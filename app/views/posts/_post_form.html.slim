@@ -1,5 +1,5 @@
-= render "shared/error_messages"
 = form_for post do |f|
+  = render "shared/error_messages", object: f.object
   .form-group
     = f.label :youtube_url, "動画URL"
     = f.text_field :youtube_url, autofocus: true, class: 'form-control'

@@ -1,7 +1,7 @@
 h2 コメント
-= render 'shared/error_messages'
 - if user_signed_in?
   = form_for [post, comment], method: :post do |f|
+    = render "shared/error_messages", object: f.object
     = f.label :body, 'コメント'
     = f.text_field :body
     = f.submit 'コメントする'
