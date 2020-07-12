@@ -22,6 +22,7 @@ RSpec.describe "Posts", js: true, type: :system do
         expect(post.title).to eq 'リゼロ二期'
         expect(post.body).to eq 'とても楽しみ'
         expect(current_path).to eq posts_path
+        expect(page).to have_content '投稿が完了しました'
       end
 
       # 編集
@@ -37,6 +38,7 @@ RSpec.describe "Posts", js: true, type: :system do
       expect(current_path).to eq post_path(post.id)
       expect(page).to have_content 'あまり楽しみでない'
       expect(page).not_to have_content 'とても楽しみ'
+      expect(page).to have_content '投稿の編集が完了しました'
 
       # 削除
       page.accept_confirm do
@@ -46,6 +48,7 @@ RSpec.describe "Posts", js: true, type: :system do
       expect(current_path).to eq posts_path
       expect(page).not_to have_content 'リゼロ二期'
       expect(Post.where(id: post.id)).to be_empty
+      expect(page).to have_content '投稿の削除が完了しました'
     end
 
     it "無効な入力値だと投稿の作成に失敗すること" do
