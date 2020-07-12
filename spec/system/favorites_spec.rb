@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Favorites", js: true, type: :system do
   let(:user) { create(:user) }
   let!(:post) { create(:post) }
-  
+
   before do
     log_in(user)
     click_link '投稿一覧'
