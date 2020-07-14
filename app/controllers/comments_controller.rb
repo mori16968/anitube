@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     @comment.post_id = @post.id
     if @comment.save
       @post.create_notification_comment(current_user, @comment.id)
-      flash[:success] =  "コメントを投稿しました"
+      flash[:success] = "コメントを投稿しました"
       redirect_back(fallback_location: root_url)
     else
       redirect_to post_path(@post.id)
@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find_by(id: params[:id], post_id: params[:post_id])
     @comment.destroy
-    flash[:success] =  "コメントを削除しました"
+    flash[:success] = "コメントを削除しました"
     redirect_back(fallback_location: root_url)
   end
 

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   PER = 8
-  
+
   def index
     @users = User.with_attached_avatar.page(params[:page]).per(PER).order(:id)
   end
