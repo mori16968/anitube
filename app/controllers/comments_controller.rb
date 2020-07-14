@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
       flash[:success] =  "コメントを投稿しました"
       redirect_back(fallback_location: root_url)
     else
-      render 'posts/show'
+      redirect_to post_path(@post.id)
     end
   end
 
