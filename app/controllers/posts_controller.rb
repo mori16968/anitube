@@ -1,11 +1,12 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
+  PER = 9
   def new
     @post = Post.new
   end
 
   def index
-    @posts = Post.all.order(created_at: :desc)
+    @posts = Post.page(params[:page]).per(PER).order(created_at: :desc)
   end
 
   def show
