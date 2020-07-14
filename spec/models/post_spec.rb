@@ -30,10 +30,10 @@ RSpec.describe Post, type: :model do
     expect(post.errors.added?(:title, :blank)).to be_truthy
   end
 
-  it "titleが51文字以上ののpostは無効であること" do
-    post.title = "a" * 51
+  it "titleが31文字以上ののpostは無効であること" do
+    post.title = "a" * 31
     post.valid?
-    expect(post.errors.added?(:title, :too_long, count: 50)).to be_truthy
+    expect(post.errors.added?(:title, :too_long, count: 30)).to be_truthy
   end
 
   it "bodyが存在しないpostは無効であること" do
@@ -48,9 +48,9 @@ RSpec.describe Post, type: :model do
     expect(post.errors.added?(:body, :blank)).to be_truthy
   end
 
-  it "bodyが201文字以上のpostは無効であること" do
-    post.body = "a" * 201
+  it "bodyが141文字以上のpostは無効であること" do
+    post.body = "a" * 141
     post.valid?
-    expect(post.errors.added?(:body, :too_long, count: 200)).to be_truthy
+    expect(post.errors.added?(:body, :too_long, count: 140)).to be_truthy
   end
 end

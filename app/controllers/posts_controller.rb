@@ -17,10 +17,8 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    url = params[:post][:youtube_url]
-    url = url.last(11)
-    @post.youtube_url = url
     if @post.save
+      flash[:success] =  "投稿が完了しました"
       redirect_to posts_path
     else
       render 'posts/new'
@@ -31,13 +29,29 @@ class PostsController < ApplicationController
     post = Post.find(params[:id])
     if post.user_id == current_user.id
       post.destroy
+      flash[:success] =  "投稿の削除が完了しました"
       redirect_to posts_path
     end
+  end
+
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      flash[:success] =  "投稿の編集が完了しました"
+      redirect_to post_path(@post.id)
+    else
+      render 'posts/edit'
+    end
+      
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:body, :title)
+    params.require(:post).permit(:body, :title, :youtube_url)
   end
 end

@@ -1,3 +1,4 @@
+= render "shared/success_messages" 
 h1 = @post.title
 
 p
@@ -7,29 +8,17 @@ p
 - if user_signed_in?
   = render 'favorite_form'
 
-iframe src="https://www.youtube.com/embed/#{@post.youtube_url}" frameborder="0" width="560" height="310"
+iframe src="https://www.youtube.com/embed/#{@post.youtube_url.last(11)}" frameborder="0" width="560" height="310"
 
 p 
   - if current_user == @post.user
-    = link_to "削除", post_path, method: :delete
+    = link_to "削除", post_path, method: :delete, data: { confirm: "投稿を削除しますか？" }
+    = link_to "編集", edit_post_path(@post)
 
 p
   = @post.body
 
-h2 コメント
-- if user_signed_in?
-  = form_for [@post, @comment], method: :post do |f|
-    = f.text_field :body
-    = f.submit
-h2 コメント一覧
-- @comments.each do |comment|
-  = comment.body
-  br
-  span by
-  = link_to comment.user.name, user_path(comment.user.id)
-  -if current_user == comment.user
-    = link_to "削除", post_comment_path(comment.post.id, comment.id), method: :delete
-  hr
+= render 'comment_form', post: @post, comment: @comment, comments: @comments
 
 h2 いいねしたユーザー
 - if @post.favorite_users.exists?
