@@ -19,13 +19,6 @@ User.create!(name:  "管理者",
              password_confirmation: "12345678",
              admin: true)
 
-# ゲストユーザー
-User.create!(name:  "ゲストユーザー",
-             email: "guest@example.com",
-             password:              "12345678",
-             password_confirmation: "12345678"
-            )
-
 # ユーザープロフィール画像
 users = User.order(:id).take(10)
 users.each_with_index do |user, i|
@@ -72,3 +65,32 @@ CSV.foreach('db/csv/comment.csv', headers: true) do |row|
   body = row[2]
   Comment.create!(user_id: user_id, post_id: post_id, body: body)
 end
+
+# ゲストユーザー設定
+guest = User.create!(name:  "ゲストユーザー",
+             email: "guest@example.com",
+             password:              "12345678",
+             password_confirmation: "12345678"
+            )
+# ゲストの投稿
+CSV.foreach("db/csv/guest_post.csv", headers: true) do |row|
+  guest.posts.create!(
+    youtube_url: row['youtube_url'],
+    title: row['title'],
+    body: row['body'],
+    created_at: rand(Time.zone.yesterday.beginning_of_day..Time.zone.yesterday.end_of_day)
+  )
+end
+# ゲストのリレーションシップ
+users = User.all
+following = users[2..10]
+followers = users[3..20]
+following.each { |followed| guest.follow(followed) }
+followers.each { |follower| follower.follow(guest) }
+# ゲストのお気に入り
+posts = Post.order(:id).take(10)
+posts.each do |post|
+  post.favorite(guest) unless guest.id == post.user_id
+end
+
+
