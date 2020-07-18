@@ -19,6 +19,13 @@ User.create!(name:  "管理者",
              password_confirmation: "12345678",
              admin: true)
 
+# ゲストユーザー
+User.create!(name:  "ゲストユーザー",
+             email: "guest@example.com",
+             password:              "12345678",
+             password_confirmation: "12345678"
+            )
+
 # ユーザープロフィール画像
 users = User.order(:id).take(10)
 users.each_with_index do |user, i|
