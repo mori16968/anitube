@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :admin_user, only: :destroy
   PER = 8
 
   def index
@@ -11,6 +13,12 @@ class UsersController < ApplicationController
     @favorite_posts = @user.favorite_posts
   end
 
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = "ユーザーの削除が完了しました"
+    redirect_to users_path
+  end
+
   def follows
     user = User.find(params[:id])
     @users = user.followings
@@ -19,5 +27,11 @@ class UsersController < ApplicationController
   def followers
     user = User.find(params[:id])
     @users = user.followers
+  end
+
+  private
+
+  def admin_user
+    redirect_to(root_path) unless current_user.admin?
   end
 end

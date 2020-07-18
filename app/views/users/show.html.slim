@@ -1,6 +1,9 @@
 h1
   = image_tag @user.avatar.variant(combine_options:{resize:"80x80^",crop:"80x80+0+0",gravity: :center}).processed
   = @user.name
+- if current_user.admin?
+  p
+    = link_to "ユーザーを削除", user_path(@user.id), method: :delete, data: { confirm: "ユーザーを削除しますか？" }
 = render 'shared/stats'
 - if current_user == @user
   h3 

@@ -12,6 +12,13 @@ require "csv"
                )
 end
 
+# 管理ユーザー
+User.create!(name:  "管理者",
+             email: "admin@example.com",
+             password:              "12345678",
+             password_confirmation: "12345678",
+             admin: true)
+
 # ユーザープロフィール画像
 users = User.order(:id).take(10)
 users.each_with_index do |user, i|
