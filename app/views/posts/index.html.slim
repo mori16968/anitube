@@ -1,14 +1,29 @@
 = render "shared/success_messages" 
 h1 投稿一覧
+hr
 
-- @posts.each do |post|
-  hr
-  h2
-    = link_to post.title, post_path(post.id)
-  p
-    = image_tag post.user.avatar.variant(resize:'30x30').processed if post.user.avatar.attached?
-    = link_to post.user.name, user_path(post.user.id)
+.row
+  - @posts.each do |post|
+    
+      .card.border-0.col-6.col-sm-6.col-md-4.mb-2
+        = link_to post_path(post.id)
+          = image_tag "http://i.ytimg.com/vi/#{post.youtube_url.last(11)}/mqdefault.jpg", class: "card-img-top img-fluid rounded"
+        .card-body.pl-0.pb-0
+          = link_to post.user, class: "float-left"
+            = image_tag post.user.avatar.variant(combine_options:{resize:"40x40^", crop:"40x40+0+0", gravity: :center}).processed if post.user.avatar.attached?
+          p.text-black.float-left.ml-3.mt-2 = post.title
+        .card-text
+          p.mb-0
+            = link_to post.user.name, post.user, class: "text-muted d-none d-sm-block"
+        .card-footer.py-0.px-0.border-0
+          span.ml-2.mt-2.text-muted.float-left.d-none.d-sm-block = "#{time_ago_in_words post.created_at}前"
+          span.ml-2.mt-2.text-muted.float-left.d-none.d-sm-block = "コメント #{post.comments.count}件"
+          span.ml-2.mt-2.text-muted.float-left.d-none.d-sm-block = "いいね #{post.comments.count}件"
+        hr
+.mx-auto.mt-4 style="width: 400px;"
+  = paginate @posts
 
-  
-    p  いいね数 #{post.favorites.count}
-= paginate @posts
+  /img src="http://i.ytimg.com/vi/#{post.youtube_url.last(11)}/mqdefault.jpg"
+        /.card-body
+        / style="height: 310px;"
+

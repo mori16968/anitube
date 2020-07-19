@@ -36,5 +36,6 @@ html
                 = link_to "ユーザー一覧", users_path, class: "nav-link"
     p.notice = notice
     p.alert = alert
-    = yield
+    .container
+      = yield
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
