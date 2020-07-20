@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_user, only: :destroy
-  PER = 8
+  PER = 24
 
   def index
     @users = User.with_attached_avatar.page(params[:page]).per(PER).order(:id)
