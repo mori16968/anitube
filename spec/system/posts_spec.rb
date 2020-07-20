@@ -26,7 +26,7 @@ RSpec.describe "Posts", js: true, type: :system do
       end
 
       # 編集
-      click_link 'リゼロ二期'
+      find('.thumbnail').click
       expect(current_path).to eq post_path(post.id)
       click_link '編集'
       expect(current_path).to eq edit_post_path(post.id)

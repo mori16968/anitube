@@ -6,7 +6,7 @@ hr
   - @posts.each do |post|
     
       .card.border-0.col-6.col-sm-6.col-md-4.mb-2
-        = link_to post_path(post.id)
+        = link_to post_path(post.id), class: 'thumbnail'
           = image_tag "http://i.ytimg.com/vi/#{post.youtube_url.last(11)}/mqdefault.jpg", class: "card-img-top img-fluid rounded"
         .card-body.pl-0.pb-0
           = link_to post.user, class: "float-left"
@@ -22,8 +22,3 @@ hr
         hr
 .mx-auto.mt-4 style="width: 400px;"
   = paginate @posts
-
-  /img src="http://i.ytimg.com/vi/#{post.youtube_url.last(11)}/mqdefault.jpg"
-        /.card-body
-        / style="height: 310px;"
-
