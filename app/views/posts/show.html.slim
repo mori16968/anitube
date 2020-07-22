@@ -4,7 +4,12 @@
 .clearfix
   .float-left
     h4 = @post.title
-    p.text-muted = @post.created_at.strftime("%Y/%m/%d")
+    p.text-muted
+      = @post.created_at.strftime("%Y/%m/%d")
+      - if current_user == @post.user
+        = link_to "編集", edit_post_path(@post)
+        |・
+        = link_to "削除", post_path, method: :delete, data: { confirm: "投稿を削除しますか？" }
   .float-right
     p
       - if user_signed_in?
@@ -19,10 +24,6 @@ hr.mt-0
     p
       = link_to @post.user.name, @post.user, class: "text-dark"
     p = @post.body
-p 
-  - if current_user == @post.user
-    = link_to "削除", post_path, method: :delete, data: { confirm: "投稿を削除しますか？" }
-    = link_to "編集", edit_post_path(@post)
 hr
 
 ul.nav.nav-tabs.justify-content-center.mt-3 role="tablist"

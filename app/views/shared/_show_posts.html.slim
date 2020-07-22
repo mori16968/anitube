@@ -8,11 +8,13 @@
           = link_to object.user
             = image_tag object.user.avatar.variant(combine_options:{resize:"50x50^", crop:"50x50+0+0", gravity: :center}).processed, class: "rounded-circle"
         .float-left
-          p = object.body
+          p = object.title
           p.mb-0 style="font-size: 90%"
             = link_to object.user.name, object.user, class: "text-muted"
           p.text-muted.mb-0 style="font-size: 95%"
-            = "コメント#{object.comments.count}件 "
-            = "いいね#{object.favorites.count}件"
-            = "#{time_ago_in_words object.created_at}前"
+            span.fa.fa-comments.mr-1 
+            span.mr-2 = object.comments.count
+            span.fa.fa-thumbs-up.mr-1
+            span = object.favorites.count
+            span = "・#{time_ago_in_words object.created_at}前"
       hr
