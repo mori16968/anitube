@@ -53,12 +53,12 @@ RSpec.describe "Posts", js: true, type: :system do
 
     it "無効な入力値だと投稿の作成に失敗すること" do
       fill_in '動画URL', with: 'https://youtu.be/Zzv42rrtUbM'
-      fill_in 'タイトル', with: 'a' * 31
+      fill_in 'タイトル', with: 'a' * 13
       fill_in '本文', with: 'a' * 141
       click_button '投稿'
 
       expect(page).to have_content '無効な項目があります'
-      expect(page).to have_content 'タイトルは30文字以内で入力してください'
+      expect(page).to have_content 'タイトルは12文字以内で入力してください'
       expect(page).to have_content '本文は140文字以内で入力してください'
     end
   end
