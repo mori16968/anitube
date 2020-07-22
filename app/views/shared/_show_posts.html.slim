@@ -1,0 +1,18 @@
+.row
+  - objects.each do |object|
+    .card.border-0.col-sm-6.col-md-4.mb-2
+      = link_to object, class: 'thumbnail'
+        = image_tag "http://i.ytimg.com/vi/#{object.youtube_url.last(11)}/mqdefault.jpg", class: "card-img-top img-fluid rounded"
+      .d-flex.mt-2
+        .float-left.mr-3
+          = link_to object.user
+            = image_tag object.user.avatar.variant(combine_options:{resize:"50x50^", crop:"50x50+0+0", gravity: :center}).processed, class: "rounded-circle"
+        .float-left
+          p = object.body
+          p.mb-0 style="font-size: 90%"
+            = link_to object.user.name, object.user, class: "text-muted"
+          p.text-muted.mb-0 style="font-size: 95%"
+            = "コメント#{object.comments.count}件 "
+            = "いいね#{object.favorites.count}件"
+            = "#{time_ago_in_words object.created_at}前"
+      hr

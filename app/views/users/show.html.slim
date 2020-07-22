@@ -21,10 +21,10 @@
         .text-muted 投稿
     li.nav-item
       a.nav-link id="item2-tab" data-toggle="tab" href="#item2" role="tab" aria-controls="item2" aria-selected="false"
-        .text-muted id="followings" フォロー中(#{@user.followings.count})
+        .text-muted フォロー中(#{@user.followings.count})
     li.nav-item
       a.nav-link id="item3-tab" data-toggle="tab" href="#item3" role="tab" aria-controls="item3" aria-selected="false"
-        .text-muted id="followers" フォロワー(#{@user.followers.count})
+        .text-muted フォロワー(#{@user.followers.count})
     li.nav-item
       a.nav-link id="item4-tab" data-toggle="tab" href="#item4" role="tab" aria-controls="item4" aria-selected="false"
         .text-muted いいね
@@ -32,22 +32,22 @@
   .tab-content.mt-4
     .tab-pane.fade.show.active id="item1" role="tabpanel" aria-labelledby="item1-tab"
       - if @posts.any?
-        = render 'show_posts', objects: @posts
+        = render 'shared/show_posts', objects: @posts
       - else
         p.text-center 投稿がありません
     .tab-pane.fade id="item2" role="tabpanel" aria-labelledby="item2-tab"
       - if @user.followings.any?
-        = render 'show_users', objects: @user.followings
+        = render 'shared/show_users', objects: @user.followings
       - else
         p.text-center フォロー中のユーザーはいません
     .tab-pane.fade id="item3" role="tabpanel" aria-labelledby="item3-tab"
       - if @user.followers.any?
-        = render 'show_users', objects: @user.followers
+        = render 'shared/show_users', objects: @user.followers
       - else
         p.text-center フォローされているユーザーはいません
     .tab-pane.fade id="item4" role="tabpanel" aria-labelledby="item4-tab"
       - if @favorite_posts.any?
-        = render 'show_posts', objects: @favorite_posts
+        = render 'shared/show_posts', objects: @favorite_posts
       -else 
         p.text-center いいねした投稿はありません
   

@@ -12,24 +12,22 @@ RSpec.describe "Comments", type: :system do
 
   it "コメントを作成、削除できること" do
     # コメント投稿
-    fill_in 'コメント', with: 'こんにちは'
-    click_button 'コメントする'
+    find(".text_field").set("こんにちは")
+    click_button 'コメント'
 
     expect(page).to have_content 'こんにちは'
     expect(page).to have_content 'コメントを投稿しました'
 
     # コメント削除
-    within '.comment_delete' do
-      click_link '削除'
-    end
+    click_link '削除'
 
     expect(page).not_to have_content 'こんにちは'
     expect(page).to have_content 'コメントを削除しました'
   end
 
   xit "141字以上のコメントは投稿できないこと" do
-    fill_in 'コメント', with: 'a' * 141
-    click_button 'コメントする'
+    find(".text_field").set("#{a * 141}")
+    click_button 'コメント'
 
     expect(page).to have_content 'コメントは140文字以内で入力してください'
   end

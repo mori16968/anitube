@@ -1,29 +1,47 @@
 = render "shared/success_messages" 
-h1 = @post.title
+.embed-responsive.embed-responsive-16by9.mb-4
+  iframe.embed-responsive-item src="https://www.youtube.com/embed/#{@post.youtube_url.last(11)}" 
+.clearfix
+  .float-left
+    h4 = @post.title
+    p.text-muted = @post.created_at.strftime("%Y/%m/%d")
+  .float-right
+    p
+      - if user_signed_in?
+        = render 'favorite_form'
+hr.mt-0
 
-p
-  = image_tag @post.user.avatar.variant(resize:'80x80').processed
-  = @post.user.name
-  
-- if user_signed_in?
-  = render 'favorite_form'
-
-iframe src="https://www.youtube.com/embed/#{@post.youtube_url.last(11)}" frameborder="0" width="560" height="310"
-
+.d-flex
+  .float-left.mr-4
+    = link_to @post.user
+      = image_tag @post.user.avatar.variant(combine_options:{resize:"80x80^", crop:"80x80+0+0", gravity: :center}).processed, class: "rounded-circle"
+  .float-left
+    p
+      = link_to @post.user.name, @post.user, class: "text-dark"
+    p = @post.body
 p 
   - if current_user == @post.user
     = link_to "削除", post_path, method: :delete, data: { confirm: "投稿を削除しますか？" }
     = link_to "編集", edit_post_path(@post)
+hr
 
-p
-  = @post.body
+ul.nav.nav-tabs.justify-content-center.mt-3 role="tablist"
+  li.nav-item
+    a.nav-link.active id="item1-tab" data-toggle="tab" href="#item1" role="tab" aria-controls="item1" aria-selected="true"
+      .text-muted コメント
+  li.nav-item
+    a.nav-link id="item2-tab" data-toggle="tab" href="#item2" role="tab" aria-controls="item2" aria-selected="false"
+      .text-muted いいね(#{@post.favorites.count})
 
-= render 'comment_form', post: @post, comment: @comment, comments: @comments
-
-h2 いいねしたユーザー
-- if @post.favorite_users.exists?
-  - @post.favorite_users.each do |user|
-    = link_to user.name, user_path(user.id)
-    hr
-- else
-  いいねはまだありません
+.tab-content.mt-4
+  .tab-pane.fade.show.active id="item1" role="tabpanel" aria-labelledby="item1-tab"
+    = render 'comment_form', post: @post, comment: @comment, comments: @comments
+    - if @comments.any?
+      = render 'show_comments', comments: @comments
+    - else
+      p.text-center.mt-4 コメントはまだありません
+  .tab-pane.fade id="item2" role="tabpanel" aria-labelledby="item2-tab"
+    - if @post.favorite_users.any?
+      = render 'shared/show_users', objects: @post.favorite_users
+    - else
+      p.text-center いいねはまだありません

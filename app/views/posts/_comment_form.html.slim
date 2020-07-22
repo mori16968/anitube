@@ -1,17 +1,6 @@
-h2 コメント
 - if user_signed_in?
   = form_for [post, comment], method: :post do |f|
     = render "shared/error_messages", object: f.object
-    = f.label :body, 'コメント'
-    = f.text_field :body
-    = f.submit 'コメントする'
-h2 コメント一覧
-- comments.each do |comment|
-  = comment.body
-  br
-  span by
-  = link_to comment.user.name, user_path(comment.user.id)
-  -if current_user == comment.user
-    .comment_delete
-      = link_to "削除", post_comment_path(comment.post.id, comment.id), method: :delete, data: { confirm: "コメントを削除しますか？" }
-  hr
+    = image_tag current_user.avatar.variant(combine_options:{resize:"40x40^", crop:"40x40+0+0", gravity: :center}).processed, class: "rounded-circle mr-4"
+    = f.text_field :body, class: "w-75 border-top-0 border-right-0 border-left-0 text_field", placeholder: "コメントを入力..."
+    = f.submit 'コメント', class: "btn btn-outline-secondary ml-1"

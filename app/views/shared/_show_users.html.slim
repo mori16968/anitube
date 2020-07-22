@@ -2,7 +2,7 @@
   - objects.each do |object|
     .card.border-0.col-6.col-md-3.col-lg-2.mb-2
       = link_to object, class: "float-left "
-        = image_tag object.avatar.variant(combine_options:{resize:"200x200^", crop:"200x200+0+0", gravity: :center}).processed, class: "card-img-top img-fluid rounded"
+        = image_tag object.avatar.variant(combine_options:{resize:"200x200^", crop:"200x200+0+0", gravity: :center}).processed, class: "card-img-top img-fluid rounded-circle"
       .card-text.mt-2
         p.mb-0
           = link_to object.name, object, class: "text-muted"

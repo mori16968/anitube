@@ -1,0 +1,15 @@
+.mt-4
+  - comments.each do |comment|
+    .d-flex
+      .float-left.mr-4
+        = link_to comment.user
+          = image_tag comment.user.avatar.variant(combine_options:{resize:"40x40^", crop:"40x40+0+0", gravity: :center}).processed, class: "rounded-circle"
+      .float-left
+        p
+          = link_to comment.user.name, comment.user, class: "text-dark"
+          span.text-muted.ml-2 = "#{time_ago_in_words comment.created_at}前"
+          -if current_user == comment.user
+            span.ml-2 = link_to "削除", post_comment_path(comment.post.id, comment.id), method: :delete, data: { confirm: "コメントを削除しますか？" }
+        p = comment.body
+    hr
+
