@@ -40,6 +40,14 @@ class User < ApplicationRecord
     followings.include?(other_user)
   end
 
+  def feed
+    Post.where("user_id IN (:following_ids) OR user_id = :user_id",
+               following_ids: following_ids, user_id: id)
+    # 下記のチュートリアルの記述だとrubocopに引っかかるので保留
+    # following_ids = "SELECT follower_id FROM relationships WHERE following_id = :user_id"
+    # Post.where("user_id IN (?) OR user_id = ?", following_ids, id)
+  end
+
   def default_avatar
     if !avatar.attached?
       avatar.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'default.png')),

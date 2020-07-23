@@ -10,30 +10,35 @@ html
   body
     header
       nav.navbar.navbar-expand-lg.navbar-light.bg-light
-        button.navbar-toggler.navbar-toggler-right type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+        button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarToggler"
           span.navbar-toggler-icon
         = link_to "ANIMIRU", root_path, class: "navbar-brand", id: "logo"
-        
-        .collapse.navbar-collapse id="navbarTogglerDemo02"
+        .collapse.navbar-collapse id="navbarToggler"
             ul.navbar-nav.mr-auto.mt-2.mt-md-0
+              li.nav-item
+                = link_to "新着投稿", posts_path, class: "nav-link"
+              li.nav-item
+                = link_to "人気投稿","#", class: "nav-link"
+              li.nav-item
+                = link_to "検索","#", method: :delete, class: "nav-link"
+            ul.navbar-nav
               - if user_signed_in?
-                li.nav-item.active
+                li.nav-item
                   = link_to "投稿する", new_post_path, class: "nav-link"
+                li.nav-item
+                  = link_to "フィード", feed_posts_path, class: "nav-link"
                 li.nav-item
                   = link_to "マイページ", user_path(current_user.id), class: "nav-link"
                 li.nav-item
                   = link_to "通知", notifications_path, class: "nav-link"
                 li.nav-item
-                  = link_to "ログアウト", destroy_user_session_path, class: "nav-link", method: :delete
-              - else
+                  = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link"
+              -else
                 li.nav-item
                   = link_to "新規登録", new_user_registration_path, class: "nav-link"
                 li.nav-item
                 = link_to "ログイン", new_user_session_path, class: "nav-link"
-              li.nav-item
-                = link_to "投稿一覧", posts_path, class: "nav-link"
-              li.nav-item
-                = link_to "ユーザー一覧", users_path, class: "nav-link"
+              
     p.notice = notice
     p.alert = alert
     .container

@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "Posts", js: true, type: :system do
-  let!(:user) { create(:user) }
-
   describe "ログインしたユーザーが投稿を作成、編集、削除する" do
+    let!(:user) { create(:user) }
+
     before do
       log_in(user)
       click_link '投稿する'
@@ -60,6 +60,50 @@ RSpec.describe "Posts", js: true, type: :system do
       expect(page).to have_content '無効な項目があります'
       expect(page).to have_content 'タイトルは12文字以内で入力してください'
       expect(page).to have_content '本文は140文字以内で入力してください'
+    end
+  end
+
+  describe "フィードにフォローしたユーザーの投稿と自身の投稿が表示される" do
+    let!(:alice) { create(:user, name: 'alice') }
+    let!(:bob) { create(:user, name: 'bob') }
+    let!(:carol) { create(:user, name: 'carol') }
+    let!(:alice_post) { create(:post, user: alice, title: 'alice_title') }
+    let!(:bob_post) { create(:post, user: bob, title: 'bob_title') }
+    let!(:carol_post) { create(:post, user: carol, title: 'carol_title') }
+
+    before do
+      log_in(alice)
+    end
+
+    it "フィードに自身の投稿が表示されているか" do
+      click_link 'フィード'
+
+      expect(current_path).to eq feed_posts_path
+      expect(page).to have_content 'alice_title'
+      expect(page).not_to have_content 'bob_title'
+      expect(page).not_to have_content 'carol_title'
+    end
+
+    it "他のユーザーをフォローするとフィードに表示,解除すると非表示になるか" do
+      # フォローしてフィードページに移動する
+      visit user_path(bob.id)
+      click_button 'フォロー'
+      click_link 'フィード'
+
+      expect(current_path).to eq feed_posts_path
+      expect(page).to have_content 'alice_title'
+      expect(page).to have_content 'bob_title'
+      expect(page).not_to have_content 'carol_title'
+
+      # フォロー解除してフィードページに移動する
+      visit user_path(bob.id)
+      click_button 'フォロー解除'
+      click_link 'フィード'
+
+      expect(current_path).to eq feed_posts_path
+      expect(page).to have_content 'alice_title'
+      expect(page).not_to have_content 'bob_title'
+      expect(page).not_to have_content 'carol_title'
     end
   end
 end

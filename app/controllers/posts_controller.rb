@@ -9,6 +9,10 @@ class PostsController < ApplicationController
     @posts = Post.page(params[:page]).per(PER).order(created_at: :desc)
   end
 
+  def feed
+    @feed_items = current_user.feed.page(params[:page]).per(PER).order(created_at: :desc)
+  end
+
   def show
     @post = Post.find(params[:id])
     @comment = Comment.new
