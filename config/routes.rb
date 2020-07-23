@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :posts do
     collection do
       get :feed
+      get :popular
     end
     resources :comments, only: [:create, :destroy]
   end

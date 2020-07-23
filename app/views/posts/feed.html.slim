@@ -1,6 +1,6 @@
 h1 フィード
 hr
-- if @feed_items.any?
-  = render 'shared/show_posts', objects: @feed_items
+- if @feed_posts.any?
+  = render 'shared/show_posts', objects: @feed_posts
 .mx-auto.mt-4 style="width: 400px;"
-  = paginate @feed_items
+  = paginate @feed_posts

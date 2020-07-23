@@ -5,26 +5,26 @@ html
       | Myapp
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     
-  body
+  body style="background-color: #fafafa;"
     header
-      nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      nav.navbar.navbar-expand-lg.navbar-light.bg-white
         button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarToggler"
           span.navbar-toggler-icon
-        = link_to "ANIMIRU", root_path, class: "navbar-brand", id: "logo"
+        = link_to image_tag("logo.png", alt: "Anitube logo", style: "width: 140px;"), root_path, class: "navbar-brand", id: "logo"
         .collapse.navbar-collapse id="navbarToggler"
             ul.navbar-nav.mr-auto.mt-2.mt-md-0
               li.nav-item
                 = link_to "新着投稿", posts_path, class: "nav-link"
               li.nav-item
-                = link_to "人気投稿","#", class: "nav-link"
+                = link_to "人気投稿", popular_posts_path, class: "nav-link"
               li.nav-item
                 = link_to "検索","#", method: :delete, class: "nav-link"
             ul.navbar-nav
               - if user_signed_in?
                 li.nav-item
-                  = link_to "投稿する", new_post_path, class: "nav-link"
+                   = link_to "投稿する", new_post_path, class: "nav-link"
                 li.nav-item
                   = link_to "フィード", feed_posts_path, class: "nav-link"
                 li.nav-item
@@ -37,7 +37,7 @@ html
                 li.nav-item
                   = link_to "新規登録", new_user_registration_path, class: "nav-link"
                 li.nav-item
-                = link_to "ログイン", new_user_session_path, class: "nav-link"
+                  = link_to "ログイン", new_user_session_path, class: "nav-link"
               
     p.notice = notice
     p.alert = alert

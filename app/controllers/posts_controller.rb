@@ -10,7 +10,11 @@ class PostsController < ApplicationController
   end
 
   def feed
-    @feed_items = current_user.feed.page(params[:page]).per(PER).order(created_at: :desc)
+    @feed_posts = current_user.feed.page(params[:page]).per(PER).order(created_at: :desc)
+  end
+
+  def popular
+    @popular_posts = Post.find(Favorite.group(:post_id).order('count(post_id) desc').pluck(:post_id))#.page(params[:page]).per(PER)
   end
 
   def show
