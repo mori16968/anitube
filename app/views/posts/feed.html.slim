@@ -1,4 +1,6 @@
-h1 フィード
+h1
+  span.fa.fa-rss.fa-fw
+  | フィード
 hr
 - if @feed_posts.any?
   = render 'shared/show_posts', objects: @feed_posts

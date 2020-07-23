@@ -6,7 +6,7 @@ RSpec.describe "Favorites", js: true, type: :system do
 
   before do
     log_in(user)
-    click_link '投稿一覧'
+    find('#index-post').click
     find('.thumbnail').click
   end
 

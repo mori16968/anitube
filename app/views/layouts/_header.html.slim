@@ -1,0 +1,70 @@
+header
+  nav.navbar.navbar-expand-md.navbar-light.bg-white.pb-1
+    = link_to image_tag("logo.png", alt: "Anitube logo", style: "width: 140px;"), root_path, class: "navbar-brand", id: "logo"
+    button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarToggler"
+      span.navbar-toggler-icon
+    .collapse.navbar-collapse id="navbarToggler"
+      ul.navbar-nav.mr-auto
+        li.nav-item
+          = link_to posts_path, class: "nav-link", id: "index-post"
+            span.fa.fa-bolt.fa-fw
+            span 新着投稿
+        li.nav-item
+          = link_to popular_posts_path, class: "nav-link", id: "popular-post"
+            span.fa.fa-thumbs-up.fa-fw
+            span 人気投稿
+        li.nav-item
+          = link_to "#", class: "nav-link"
+            span.fa.fa-search.fa-fw
+            span 検索
+        - if user_signed_in? && current_user.admin?
+          li.nav-item
+            =link_to "ユーザー一覧", users_path, class: "nav-link"
+      ul.navbar-nav
+        - if user_signed_in?
+          .d-none.d-md-flex
+            li.nav-item
+              = link_to new_post_path, class: "nav-link", id: "new-post"
+                i.fa.fa-file-video-o.fa-fw
+            li.nav-item
+              = link_to feed_posts_path, class:"nav-link", id: "feed-post"
+                i.fa.fa-rss.fa-fw
+            li.nav-item
+              = link_to notifications_path, class:"nav-link", id: "notification"
+                i.fa.fa-bell.fa-fw
+            li.nav-item
+              = link_to current_user, id: "current-user"
+                = image_tag current_user.avatar.variant(combine_options:{resize:"25x25^", crop:"25x25+0+0", gravity: :center}).processed, class: "nav-link rounded-circle ml-2"
+            li.nav-item
+              = link_to destroy_user_session_path, method: :delete, class: "nav-link", id: "log-out"
+                i.fa.fa-sign-out.fa-fw
+          .d-block.d-md-none
+            li.nav-item
+              = link_to new_post_path, class: "nav-link"
+                i.fa.fa-file-video-o.fa-fw
+                span 投稿
+            li.nav-item
+              = link_to feed_posts_path, class:"nav-link"
+                i.fa.fa-rss.fa-fw
+                span フィード
+            li.nav-item
+              = link_to notifications_path, class:"nav-link"
+                i.fa.fa-bell.fa-fw
+                span 通知
+            li.nav-item
+              = link_to current_user, class:"nav-link"
+                span = image_tag current_user.avatar.variant(combine_options:{resize:"30x30^", crop:"30x30+0+0", gravity: :center}).processed, class: "rounded-circle"
+                span.ml-1 マイページ
+            li.nav-item
+              = link_to destroy_user_session_path, method: :delete, class: "nav-link"
+                i.fa.fa-sign-out.fa-fw
+                span ログアウト
+        -else
+          li.nav-item
+            = link_to new_user_registration_path, class: "nav-link", id: "sign-up"
+              span.fa.fa-user-plus.fa-fw
+              span 新規登録
+          li.nav-item
+            = link_to new_user_session_path, class: "nav-link", id: "sign-in"
+              span.fa.fa-sign-in.fa-fw
+              span ログイン

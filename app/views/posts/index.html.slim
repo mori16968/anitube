@@ -1,5 +1,7 @@
 = render "shared/success_messages" 
-h1 新着投稿
+h1
+  span.fa.fa-bolt.fa-fw
+  | 新着投稿
 hr
 = render 'shared/show_posts', objects: @posts
 .mx-auto.mt-4 style="width: 400px;"

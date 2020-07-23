@@ -23,10 +23,7 @@ RSpec.describe "Signup", type: :system do
 
       expect(current_path).to eq root_path
       expect(page).to have_content 'アカウント登録が完了しました。'
-      expect(page).to have_selector 'header', text: '投稿する'
-      expect(page).to have_selector 'header', text: 'マイページ'
-      expect(page).to have_selector 'header', text: '通知'
-      expect(page).to have_selector 'header', text: 'ログアウト'
+      expect(User.count).to eq 2
     end
   end
 

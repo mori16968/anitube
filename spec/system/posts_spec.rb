@@ -6,7 +6,7 @@ RSpec.describe "Posts", js: true, type: :system do
 
     before do
       log_in(user)
-      click_link '投稿する'
+      find('#new-post').click
     end
 
     it "新規投稿を作成、編集、削除できること" do
@@ -76,7 +76,7 @@ RSpec.describe "Posts", js: true, type: :system do
     end
 
     it "フィードに自身の投稿が表示されているか" do
-      click_link 'フィード'
+      find('#feed-post').click
 
       expect(current_path).to eq feed_posts_path
       expect(page).to have_content 'alice_title'
@@ -88,7 +88,7 @@ RSpec.describe "Posts", js: true, type: :system do
       # フォローしてフィードページに移動する
       visit user_path(bob.id)
       click_button 'フォロー'
-      click_link 'フィード'
+      find('#feed-post').click
 
       expect(current_path).to eq feed_posts_path
       expect(page).to have_content 'alice_title'
@@ -98,7 +98,7 @@ RSpec.describe "Posts", js: true, type: :system do
       # フォロー解除してフィードページに移動する
       visit user_path(bob.id)
       click_button 'フォロー解除'
-      click_link 'フィード'
+      find('#feed-post').click
 
       expect(current_path).to eq feed_posts_path
       expect(page).to have_content 'alice_title'

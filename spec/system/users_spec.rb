@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :system, js: true do
-  let!(:user) { create(:user) }
+  let(:user) { create(:user) }
   let!(:admin_user) do
     create(:user,
            name: 'Admin',
@@ -13,8 +13,7 @@ RSpec.describe "Users", type: :system, js: true do
 
   it "管理ユーザーが別のユーザーを削除できること" do
     log_in(admin_user)
-    click_link "ユーザー一覧"
-    expect(current_path).to eq users_path
+    click_link 'ユーザー一覧'
     click_link user.name
     expect(current_path).to eq user_path(user.id)
 

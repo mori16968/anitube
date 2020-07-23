@@ -14,7 +14,9 @@ class PostsController < ApplicationController
   end
 
   def popular
-    @popular_posts = Post.find(Favorite.group(:post_id).order('count(post_id) desc').pluck(:post_id))#.page(params[:page]).per(PER)
+    @popular_posts = Post.find(Favorite.group(:post_id).
+      order('count(post_id) desc').
+      pluck(:post_id))
   end
 
   def show

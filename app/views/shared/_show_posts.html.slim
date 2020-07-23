@@ -1,6 +1,6 @@
 .row
   - objects.each do |object|
-    .card.border-0.col-sm-6.col-md-4.mb-4 style="background-color: #fffafa;"
+    .card.border-0.col-6.col-sm-6.col-md-4.mb-4 style="background-color: #fffafa;"
       = link_to object, class: 'thumbnail'
         = image_tag "http://i.ytimg.com/vi/#{object.youtube_url.last(11)}/mqdefault.jpg", class: "img-fluid"
       .d-flex.mt-2
@@ -12,7 +12,7 @@
           p.mb-0 style="font-size: 90%"
             = link_to object.user.name, object.user, class: "text-muted"
           p.text-muted.mb-0 style="font-size: 95%"
-            span.fa.fa-comments.mr-1 
+            span.fa.fa-commenting.mr-1 
             span.mr-2 = object.comments.count
             span.fa.fa-thumbs-up.mr-1
             span = object.favorites.count
