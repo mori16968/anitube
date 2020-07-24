@@ -7,5 +7,5 @@ hr
   = f.search_field :name_cont, class: "w-75 border-top-0 border-right-0 border-left-0 mt-5", placeholder: "ユーザー名を入力...", style: "background-color: #fafafa;"
   = f.submit '検索', class: "btn btn-outline-secondary ml-1"
 = render 'shared/show_users', objects: @users
-.mx-auto.mt-4
+.mx-auto.mt-4  style="width: 400px;"
   = paginate @users
