@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Comments", type: :system do
+RSpec.describe "Comments", js: true, type: :system do
   let(:user) { create(:user) }
   let!(:post) { create(:post) }
 
@@ -19,7 +19,9 @@ RSpec.describe "Comments", type: :system do
     expect(page).to have_content 'コメントを投稿しました'
 
     # コメント削除
-    click_link '削除'
+    page.accept_confirm do
+      find('#comment-delete').click
+    end
 
     expect(page).not_to have_content 'こんにちは'
     expect(page).to have_content 'コメントを削除しました'

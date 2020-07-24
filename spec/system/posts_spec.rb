@@ -28,7 +28,7 @@ RSpec.describe "Posts", js: true, type: :system do
       # 編集
       find('.thumbnail').click
       expect(current_path).to eq post_path(post.id)
-      click_link '編集'
+      find('#post-edit').click
       expect(current_path).to eq edit_post_path(post.id)
       expect(page).to have_content '投稿編集'
 
@@ -42,7 +42,7 @@ RSpec.describe "Posts", js: true, type: :system do
 
       # 削除
       page.accept_confirm do
-        click_link '削除'
+        find('#post-delete').click
       end
       sleep 2
       expect(current_path).to eq posts_path
