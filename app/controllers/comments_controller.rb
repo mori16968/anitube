@@ -5,20 +5,21 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = current_user.comments.build(comment_params)
     @comment.post_id = @post.id
-    if @comment.save
-      @post.create_notification_comment(current_user, @comment.id)
-      flash[:success] = "コメントを投稿しました"
-      redirect_back(fallback_location: root_url)
-    else
-      redirect_to post_path(@post.id)
+    respond_to do |format|
+      if @comment.save
+        @post.create_notification_comment(current_user, @comment.id)
+        format.js { render :show_comments }
+      else
+        flash.now[:alert] = '投稿に失敗しました'
+        format.js { render :show_comments }
+      end
     end
   end
 
   def destroy
     @comment = Comment.find_by(id: params[:id], post_id: params[:post_id])
     @comment.destroy
-    flash[:success] = "コメントを削除しました"
-    redirect_back(fallback_location: root_url)
+    render :show_comments
   end
 
   private

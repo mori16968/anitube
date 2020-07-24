@@ -1,0 +1,6 @@
+- if user_signed_in?
+  = form_for [post, comment], method: :post, remote: true do |f|
+    = render "shared/error_messages", object: f.object
+    = image_tag current_user.avatar.variant(combine_options:{resize:"40x40^", crop:"40x40+0+0", gravity: :center}).processed, class: "rounded-circle mr-4"
+    = f.text_field :body, id: "text-field", class: "w-75 border-top-0 border-right-0 border-left-0 text_field", placeholder: "コメントを入力...", style: "background-color: #fafafa;"
+    = f.submit 'コメント', class: "btn btn-outline-secondary ml-1"

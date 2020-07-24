@@ -38,11 +38,9 @@ ul.nav.nav-tabs.justify-content-center.mt-3 role="tablist"
 
 .tab-content.mt-4
   .tab-pane.fade.show.active id="item1" role="tabpanel" aria-labelledby="item1-tab"
-    = render 'comment_form', post: @post, comment: @comment, comments: @comments
-    - if @comments.any?
-      = render 'show_comments', comments: @comments
-    - else
-      p.text-center.mt-4 コメントはまだありません
+    = render 'comments/comment_form', post: @post, comment: @comment, comments: @comments
+    #comments_area
+      = render 'comments/show_comments', comments: @comments
   .tab-pane.fade id="item2" role="tabpanel" aria-labelledby="item2-tab"
     - if @post.favorite_users.any?
       = render 'shared/show_users', objects: @post.favorite_users
