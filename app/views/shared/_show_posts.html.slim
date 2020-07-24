@@ -1,6 +1,6 @@
-.row
+.row.row-20
   - objects.each do |object|
-    .card.border-0.col-6.col-sm-6.col-md-4.mb-4 style="background-color: #fffafa;"
+    .card.border-0.col-6.col-sm-6.col-md-4.col-lg-3.mb-4 style="background-color: #fffafa;"
       = link_to object, class: 'thumbnail'
         = image_tag "http://i.ytimg.com/vi/#{object.youtube_url.last(11)}/mqdefault.jpg", class: "img-fluid"
       .d-flex.mt-2
