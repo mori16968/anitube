@@ -23,26 +23,27 @@ header
       ul.navbar-nav
         - if user_signed_in?
           .d-none.d-md-flex
-            li.nav-item
-              = link_to new_post_path, class: "nav-link", id: "new-post"
+            li.nav-item data-toggle="tooltip" title="投稿する"
+              = link_to new_post_path, class: "nav-link", id: "new-post" 
                 i.fa.fa-file-video-o.fa-fw
-            li.nav-item
+            li.nav-item data-toggle="tooltip" title="フィード"
               = link_to feed_posts_path, class:"nav-link", id: "feed-post"
                 i.fa.fa-rss.fa-fw
-            li.nav-item
+            li.nav-item data-toggle="tooltip" title="通知"
               = link_to notifications_path, class:"nav-link", id: "notification"
                 i.fa.fa-bell.fa-fw
-            li.nav-item
+            li.nav-item data-toggle="tooltip" title="マイページ"
               = link_to current_user, id: "current-user"
-                = image_tag current_user.avatar.variant(combine_options:{resize:"25x25^", crop:"25x25+0+0", gravity: :center}).processed, class: "nav-link rounded-circle ml-2"
-            li.nav-item
+                = image_tag current_user.avatar.variant(combine_options:{resize:"25x25^", crop:"25x25+0+0", gravity: :center}).processed,
+                  class: "nav-link rounded-circle ml-2" 
+            li.nav-item data-toggle="tooltip" title="ログアウト"
               = link_to destroy_user_session_path, method: :delete, class: "nav-link", id: "log-out"
                 i.fa.fa-sign-out.fa-fw
           .d-block.d-md-none
             li.nav-item
               = link_to new_post_path, class: "nav-link"
                 i.fa.fa-file-video-o.fa-fw
-                span 投稿
+                span 投稿する
             li.nav-item
               = link_to feed_posts_path, class:"nav-link"
                 i.fa.fa-rss.fa-fw
@@ -53,7 +54,8 @@ header
                 span 通知
             li.nav-item
               = link_to current_user, class:"nav-link"
-                span = image_tag current_user.avatar.variant(combine_options:{resize:"30x30^", crop:"30x30+0+0", gravity: :center}).processed, class: "rounded-circle"
+                span = image_tag current_user.avatar.variant(combine_options:{resize:"30x30^", crop:"30x30+0+0", gravity: :center}).processed,
+                  class: "rounded-circle"
                 span.ml-1 マイページ
             li.nav-item
               = link_to destroy_user_session_path, method: :delete, class: "nav-link"
