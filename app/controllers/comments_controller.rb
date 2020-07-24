@@ -10,7 +10,6 @@ class CommentsController < ApplicationController
         @post.create_notification_comment(current_user, @comment.id)
         format.js { render :show_comments }
       else
-        flash.now[:alert] = '投稿に失敗しました'
         format.js { render :show_comments }
       end
     end

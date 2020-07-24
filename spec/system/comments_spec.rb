@@ -16,7 +16,6 @@ RSpec.describe "Comments", js: true, type: :system do
     click_button 'コメント'
 
     expect(page).to have_content 'こんにちは'
-    expect(page).to have_content 'コメントを投稿しました'
 
     # コメント削除
     page.accept_confirm do
@@ -24,7 +23,6 @@ RSpec.describe "Comments", js: true, type: :system do
     end
 
     expect(page).not_to have_content 'こんにちは'
-    expect(page).to have_content 'コメントを削除しました'
   end
 
   xit "141字以上のコメントは投稿できないこと" do
