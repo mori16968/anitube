@@ -17,5 +17,5 @@ h1 新規ユーザー登録
     = f.label :password_confirmation, "パスワード（確認用）"
     = f.password_field :password_confirmation, autocomplete: 'current-password', class: 'form-control'
   .form-group
-    = f.submit t('.sign_up'), class: 'btn btn-primary'
+    = f.submit t('.sign_up'), class: 'btn btn-outline-primary'
 = render 'devise/shared/links'
