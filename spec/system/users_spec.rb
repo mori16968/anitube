@@ -13,7 +13,7 @@ RSpec.describe "Users", type: :system, js: true do
 
   it "管理ユーザーが別のユーザーを削除できること" do
     log_in(admin_user)
-    click_link 'ユーザー一覧'
+    click_link '検索'
     click_link user.name
     expect(current_path).to eq user_path(user.id)
 

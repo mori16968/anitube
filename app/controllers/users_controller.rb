@@ -5,6 +5,8 @@ class UsersController < ApplicationController
 
   def index
     @users = User.with_attached_avatar.page(params[:page]).per(PER).order(:id)
+    @q = User.ransack(params[:q])
+    @users = @q.result(distinct: true).page(params[:page]).per(PER).order(:id)
   end
 
   def show

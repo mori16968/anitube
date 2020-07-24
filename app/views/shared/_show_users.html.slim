@@ -6,9 +6,13 @@
       .card-text.text-center
         p.mb-0
           = link_to object.name, object, class: "text-muted"
+        - if current_user.admin?
+          = link_to "ユーザーを削除", object, method: :delete, data: { confirm: "#{object.name}を削除しますか？" }
       hr
     .card.border-0.col-12.d-flex.mt-2.d-block.d-sm-none style="background-color: #fafafa;"
       .float-left.mr-3
         = link_to object
           = image_tag object.avatar.variant(combine_options:{resize:"40x40^", crop:"40x40+0+0", gravity: :center}).processed, class: "rounded-circle"
         = link_to object.name, object, class: "text-muted"
+        - if current_user.admin?
+          = link_to "ユーザーを削除", object, method: :delete, data: { confirm: "#{object.name}を削除しますか？" }
