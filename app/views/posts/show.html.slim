@@ -7,9 +7,11 @@
     p.text-muted
       = @post.created_at.strftime("%Y/%m/%d")
       - if current_user == @post.user
-        = link_to "編集", edit_post_path(@post)
+        = link_to edit_post_path(@post)
+          i.fa.fa-cog.text-muted.ml-2 style="font-size: 20px;" data-toggle="tooltip" data-placement="bottom" title="編集"
         |・
-        = link_to "削除", post_path, method: :delete, data: { confirm: "投稿を削除しますか？" }
+        = link_to post_path, method: :delete, data: { confirm: "投稿を削除しますか？" }
+          i.fa.fa-trash.text-muted style="font-size: 20px;" data-toggle="tooltip" data-placement="bottom" title="投稿を削除"
   .float-right
     p
       - if user_signed_in?
