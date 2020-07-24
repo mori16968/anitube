@@ -17,6 +17,9 @@ class PostsController < ApplicationController
     @popular_posts = Post.find(Favorite.group(:post_id).
       order('count(post_id) desc').
       pluck(:post_id))
+    @popular_posts = Kaminari.paginate_array(@popular_posts).
+      page(params[:page]).
+      per(PER)
   end
 
   def show
