@@ -34,7 +34,8 @@ ul.nav.nav-tabs.justify-content-center.mt-3 role="tablist"
       .text-muted コメント(#{@post.comments.count})
   li.nav-item
     a.nav-link id="item2-tab" data-toggle="tab" href="#item2" role="tab" aria-controls="item2" aria-selected="false"
-      .text-muted いいね(#{@post.favorites.count})
+      span.text-muted いいね
+      span.text-muted id="favorite-#{@post.id}" (#{@post.favorites.count})
 
 .tab-content.mt-4
   .tab-pane.fade.show.active id="item1" role="tabpanel" aria-labelledby="item1-tab"
@@ -42,7 +43,4 @@ ul.nav.nav-tabs.justify-content-center.mt-3 role="tablist"
     #comments_area
       = render 'comments/show_comments', comments: @comments
   .tab-pane.fade id="item2" role="tabpanel" aria-labelledby="item2-tab"
-    - if @post.favorite_users.any?
-      = render 'shared/show_users', objects: @post.favorite_users
-    - else
-      p.text-center いいねはまだありません
+    = render 'shared/show_users', objects: @post.favorite_users
