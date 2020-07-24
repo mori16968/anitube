@@ -25,7 +25,7 @@ hr.mt-0
   .float-left
     p
       = link_to @post.user.name, @post.user, class: "text-dark"
-    p = @post.body
+    p = safe_join(@post.body.split("\n"),tag(:br))
 hr
 
 ul.nav.nav-tabs.justify-content-center.mt-3 role="tablist"
