@@ -12,6 +12,7 @@ html
     p.alert = alert
     .container
       = yield
+    = render 'layouts/footer'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     javascript:
       $(function () {

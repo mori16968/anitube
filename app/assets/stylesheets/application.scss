@@ -1,6 +1,28 @@
 @import "bootstrap";
 @import "font-awesome";
 
+// 大枠のレイアウト
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex: 1;
+}
+
+// footer
+footer {
+  background: #fff;
+  text-align: center;
+  height: 30px;
+  small {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+  }
+}
+
 // ページネーションのデザイン
 .pagination>li>a {          
   border: none;
