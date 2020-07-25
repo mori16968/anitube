@@ -20,7 +20,7 @@ User.create!(name:  "管理者",
              admin: true)
 
 # ユーザープロフィール画像
-users = User.order(:id).take(10)
+users = User.order(:id).take(12)
 users.each_with_index do |user, i|
   user.avatar.attach(io: File.open(Rails.root.join("db/fixtures/avatar/avatar-#{i + 1}.jpg")), filename: "avatar-#{i + 1}.jpg")
   user.save
@@ -63,7 +63,11 @@ CSV.foreach('db/csv/comment.csv', headers: true) do |row|
   user_id = row[0]
   post_id = row[1]
   body = row[2]
-  Comment.create!(user_id: user_id, post_id: post_id, body: body)
+  Comment.create!(
+    user_id: user_id,
+    post_id: post_id,
+    body: body,
+    created_at: rand(Time.zone.yesterday.beginning_of_day..Time.zone.yesterday.end_of_day))
 end
 
 # ゲストユーザー設定
