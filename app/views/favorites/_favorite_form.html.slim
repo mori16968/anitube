@@ -1,0 +1,5 @@
+#favorite_form
+  - if @post.favorite?(current_user)
+    = render 'favorites/cancel_favorite'
+  - else
+    = render 'favorites/favorite'

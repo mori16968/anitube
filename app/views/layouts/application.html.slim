@@ -5,36 +5,16 @@ html
       | Myapp
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    
-  body
-    header
-      nav.navbar.navbar-expand-lg.navbar-light.bg-light
-        button.navbar-toggler.navbar-toggler-right type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-          span.navbar-toggler-icon
-        = link_to "ANIMIRU", root_path, class: "navbar-brand", id: "logo"
-        
-        .collapse.navbar-collapse id="navbarTogglerDemo02"
-            ul.navbar-nav.mr-auto.mt-2.mt-md-0
-              - if user_signed_in?
-                li.nav-item.active
-                  = link_to "投稿する", new_post_path, class: "nav-link"
-                li.nav-item
-                  = link_to "マイページ", user_path(current_user.id), class: "nav-link"
-                li.nav-item
-                  = link_to "通知", notifications_path, class: "nav-link"
-                li.nav-item
-                  = link_to "ログアウト", destroy_user_session_path, class: "nav-link", method: :delete
-              - else
-                li.nav-item
-                  = link_to "新規登録", new_user_registration_path, class: "nav-link"
-                li.nav-item
-                = link_to "ログイン", new_user_session_path, class: "nav-link"
-              li.nav-item
-                = link_to "投稿一覧", posts_path, class: "nav-link"
-              li.nav-item
-                = link_to "ユーザー一覧", users_path, class: "nav-link"
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+  body style="background-color: #fafafa;"
+    = render 'layouts/header'
     p.notice = notice
     p.alert = alert
-    = yield
+    .container
+      = yield
+    = render 'layouts/footer'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    javascript:
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+      });

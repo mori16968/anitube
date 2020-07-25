@@ -15,9 +15,8 @@ RSpec.describe "Sessions", type: :system do
       log_in(user)
 
       expect(page).to have_content 'ログインしました。'
-      expect(page).to have_selector 'header', text: '投稿する'
-      expect(page).to have_selector 'header', text: 'マイページ'
-      expect(page).to have_selector 'header', text: '通知'
+      link = find('#log-out')
+      expect(link[:href]).to eq destroy_user_session_path
       expect(page).to have_selector 'header', text: 'ログアウト'
       expect(current_path).to eq user_path(user.id)
     end

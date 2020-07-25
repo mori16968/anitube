@@ -8,6 +8,6 @@
     = f.text_field :title, class: 'form-control'
   .form-group
     = f.label :body, "本文"
-    = f.text_area :body, class: 'form-control'
+    = f.text_area :body, size: "20x10", class: 'form-control'
   .form-group
-    = f.submit yield(:button_text), class: 'btn btn-primary'
+    = f.submit yield(:button_text), class: 'btn btn-outline-primary'

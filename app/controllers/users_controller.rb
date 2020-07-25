@@ -1,21 +1,30 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :admin_user, only: :destroy
+  PER = 24
+
   def index
-    @users = User.with_attached_avatar.order(:id)
+    @users = User.with_attached_avatar.page(params[:page]).per(PER).order(:id)
+    @q = User.ransack(params[:q])
+    @users = @q.result(distinct: true).page(params[:page]).per(PER).order(:id)
   end
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts
-    @favorite_posts = @user.favorite_posts
+    @posts = @user.posts.order(created_at: :desc)
+    @favorite_posts = @user.favorite_posts.order(created_at: :desc)
   end
 
-  def follows
+  def destroy
     user = User.find(params[:id])
-    @users = user.followings
+    user.destroy
+    flash[:success] = "ユーザーの削除が完了しました"
+    redirect_to users_path
   end
 
-  def followers
-    user = User.find(params[:id])
-    @users = user.followers
+  private
+
+  def admin_user
+    redirect_to(root_path) unless current_user.admin?
   end
 end

@@ -1,11 +1,25 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
+  PER = 12
   def new
     @post = Post.new
   end
 
   def index
-    @posts = Post.all.order(created_at: :desc)
+    @posts = Post.page(params[:page]).per(PER).order(created_at: :desc)
+  end
+
+  def feed
+    @feed_posts = current_user.feed.page(params[:page]).per(PER).order(created_at: :desc)
+  end
+
+  def popular
+    @popular_posts = Post.find(Favorite.group(:post_id).
+      order('count(post_id) desc').
+      pluck(:post_id))
+    @popular_posts = Kaminari.paginate_array(@popular_posts).
+      page(params[:page]).
+      per(PER)
   end
 
   def show
@@ -18,7 +32,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-      flash[:success] =  "投稿が完了しました"
+      flash[:success] = "投稿が完了しました"
       redirect_to posts_path
     else
       render 'posts/new'
@@ -29,7 +43,7 @@ class PostsController < ApplicationController
     post = Post.find(params[:id])
     if post.user_id == current_user.id
       post.destroy
-      flash[:success] =  "投稿の削除が完了しました"
+      flash[:success] = "投稿の削除が完了しました"
       redirect_to posts_path
     end
   end
@@ -41,12 +55,11 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      flash[:success] =  "投稿の編集が完了しました"
+      flash[:success] = "投稿の編集が完了しました"
       redirect_to post_path(@post.id)
     else
       render 'posts/edit'
     end
-      
   end
 
   private

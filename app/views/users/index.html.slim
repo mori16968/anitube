@@ -1,6 +1,11 @@
-h1 Users#index
-- @users.each do |user|
-  hr
-  h3
-    = image_tag user.avatar.variant(combine_options:{resize:"80x80^",crop:"80x80+0+0",gravity: :center}).processed
-    = link_to user.name, user_path(user.id)
+= render "shared/success_messages" 
+h1
+  span.fa.fa-search.fa-fw
+  | ユーザー検索
+hr
+= search_form_for @q, class: 'mb-5' do |f|
+  = f.search_field :name_cont, class: "w-75 border-top-0 border-right-0 border-left-0 mt-5", placeholder: "ユーザー名を入力...", style: "background-color: #fafafa;"
+  = f.submit '検索', class: "btn btn-outline-secondary ml-1"
+= render 'shared/show_users', objects: @users
+.mx-auto.mt-4  style="width: 400px;"
+  = paginate @users

@@ -6,8 +6,8 @@ RSpec.describe "Favorites", js: true, type: :system do
 
   before do
     log_in(user)
-    click_link '投稿一覧'
-    click_link post.title
+    find('#index-post').click
+    find('.thumbnail').click
   end
 
   it "ユーザーが投稿に対していいね、いいね解除できること" do

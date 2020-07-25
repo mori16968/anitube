@@ -1,0 +1,8 @@
+h1
+  span.fa.fa-thumbs-up.fa-fw
+  | 人気投稿
+hr
+- if @popular_posts.any?
+  = render 'shared/show_posts', objects: @popular_posts
+.mx-auto.mt-4 style="width: 400px;"
+  = paginate @popular_posts
