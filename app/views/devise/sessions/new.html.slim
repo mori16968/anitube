@@ -17,5 +17,5 @@ h1
 = form_for(resource, as: resource_name, url: session_path(resource_name)) do |guest|
   = guest.hidden_field :email, value: 'guest@example.com'
   = guest.hidden_field :password, value: '12345678'
-  = guest.submit 'お試しログイン', class: 'btn btn-outline-success'
+  = guest.submit 'お試しログイン', class: 'btn btn-success'
 = render 'devise/shared/links'
