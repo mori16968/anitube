@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
-  PER = 9
+  PER = 12
   def new
     @post = Post.new
   end
