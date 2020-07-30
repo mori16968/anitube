@@ -12,8 +12,7 @@ class VideosController < ApplicationController
       max_results: 8,
       order: :relevance,
       page_token: next_page_token,
-      published_after: after.iso8601,
-      published_before: before.iso8601
+      published_after: 3.month.ago.iso8601,
     }
     service.list_searches(:snippet, opt)
   end

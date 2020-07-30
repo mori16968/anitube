@@ -6,4 +6,5 @@
         = image_tag "http://i.ytimg.com/vi/#{item.id.video_id}/mqdefault.jpg", class: "img-fluid"
       .mt-2
         p.mb-0 = snippet.title
-        p.text-muted style="font-size: 90%" = snippet.channel_title
+        p.text-muted.mb-0 style="font-size: 90%" = snippet.channel_title
+        p.text-muted style="font-size: 90%" = snippet.published_at.strftime("%Y/%m/%d")
