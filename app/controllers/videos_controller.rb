@@ -10,7 +10,7 @@ class VideosController < ApplicationController
       q: keyword,
       type: 'video',
       max_results: 8,
-      order: :date,
+      order: :relevance,
       page_token: next_page_token,
       published_after: after.iso8601,
       published_before: before.iso8601
