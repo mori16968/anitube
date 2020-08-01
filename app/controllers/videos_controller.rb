@@ -13,6 +13,7 @@ class VideosController < ApplicationController
       order: :relevance,
       page_token: next_page_token,
       published_after: 3.month.ago.iso8601,
+      video_category_id: 1
     }
     service.list_searches(:snippet, opt)
   end
