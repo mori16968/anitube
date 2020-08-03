@@ -1,12 +1,32 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
   PER = 12
+  GOOGLE_API_KEY = ENV['MY_GOOGLE_API_KEY']
+
+  def find_videos(keyword)
+    service = Google::Apis::YoutubeV3::YouTubeService.new
+    service.key = GOOGLE_API_KEY
+
+    next_page_token = nil
+    opt = {
+      q: keyword,
+      type: 'video',
+      max_results: 5,
+      order: :relevance,
+      page_token: next_page_token,
+      published_after: 3.month.ago.iso8601,
+      video_category_id: 1
+    }
+    service.list_searches(:snippet, opt)
+  end
+
   def new
     @post = Post.new
   end
 
   def index
     @posts = Post.page(params[:page]).per(PER).order(created_at: :desc)
+    @public_videos = find_videos('アニメ 公式 PV')
   end
 
   def feed
