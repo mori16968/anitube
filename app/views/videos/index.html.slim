@@ -1,10 +1,10 @@
 .row.row-20
-  - @youtube_data.items.each do |item|
-    - snippet = item.snippet
+  - @videos.each do |video|
     .card.border-0.col-6.col-sm-6.col-md-4.col-lg-3.mb-4 style="background-color: #fffafa;"
-      = link_to video_path(item.id), class: 'thumbnail'
-        = image_tag "http://i.ytimg.com/vi/#{item.id.video_id}/mqdefault.jpg", class: "img-fluid"
+      /= link_to image_tag(video.thumbnail, class: "img-fluid thumbnail"), video_path(video)
+      = link_to video, class: 'thumbnail'
+        = image_tag "http://i.ytimg.com/vi/#{video.url}/mqdefault.jpg", class: "img-fluid"
       .mt-2
-        p.mb-0 = snippet.title
-        p.text-muted.mb-0 style="font-size: 90%" = snippet.channel_title
-        p.text-muted style="font-size: 90%" = snippet.published_at.strftime("%Y/%m/%d")
+        p.mb-0 = video.title
+        /p.text-muted.mb-0 style="font-size: 90%" = snippet.channel_title
+        p.text-muted style="font-size: 90%" = video.date.strftime("%Y/%m/%d")

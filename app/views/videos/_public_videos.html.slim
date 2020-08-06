@@ -1,0 +1,18 @@
+h1.mt-0
+  span.fa.fa-check-circle.fa-fw
+  | 注目公式PV
+hr
+.swiper-container
+  .swiper-wrapper
+    - videos.each do |video|
+      .swiper-slide
+        .embed-responsive.embed-responsive-16by9.mb-4
+          iframe.embed-responsive-item src="https://www.youtube.com/embed/#{video.url}" 
+  .swiper-scrollbar
+  .swiper-button-prev.swiper-button-white
+  .swiper-button-next.swiper-button-white
+
+h2.text-right.mt-4
+  = link_to  videos_path, class: "text-muted"
+    span.fa.fa-angle-double-right
+    span MORE
