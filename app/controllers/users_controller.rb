@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_user, only: :destroy
-  PER = 24
+  MAX_PER_PAGE = 24
 
   def index
-    @users = User.with_attached_avatar.page(params[:page]).per(PER).order(:id)
+    @users = User.with_attached_avatar.page(params[:page]).per(MAX_PER_PAGE).order(:id)
     @q = User.ransack(params[:q])
-    @users = @q.result(distinct: true).page(params[:page]).per(PER).order(:id)
+    @users = @q.result(distinct: true).page(params[:page]).per(MAX_PER_PAGE).order(:id)
   end
 
   def show

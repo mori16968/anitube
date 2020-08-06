@@ -1,0 +1,10 @@
+.embed-responsive.embed-responsive-16by9.mb-4
+  iframe.embed-responsive-item src="https://www.youtube.com/embed/#{@video.url}" 
+.clearfix
+  .float-left
+    h4 = @video.title
+    p.text-muted
+      = @video.date.strftime("%Y/%m/%d")
+hr
+/p.mb-0
+  = link_to "この動画で投稿する", new_post_path(@video), class: "text-muted"

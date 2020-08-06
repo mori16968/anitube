@@ -51,6 +51,8 @@ gem 'bullet'
 gem 'kaminari'
 gem 'font-awesome-rails'
 gem 'ransack'
+gem 'google-api-client', '0.9.20', require: 'google/apis/youtube_v3'
+gem 'dotenv-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
