@@ -2,7 +2,7 @@ class Video < ApplicationRecord
   GOOGLE_API_KEY = ENV['MY_GOOGLE_API_KEY']
   params = URI.encode_www_form({
     part:  "snippet",
-    key: 'AIzaSyB96X73K0OUQh8dgtImU1iKQ91e2dEXUg4',
+    key: 'GOOGLE_API_KEY',
     maxResults:  "8",
     q: 'PV',
     type:  'video',
@@ -29,4 +29,6 @@ class Video < ApplicationRecord
     )
     movie.save
   end
+
+
 end
