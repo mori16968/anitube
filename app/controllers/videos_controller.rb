@@ -1,7 +1,8 @@
 class VideosController < ApplicationController
+  PER = 12
 
   def index
-    @videos = Video.all
+    @videos = Video.page(params[:page]).per(PER)
   end
 
   def show
