@@ -1,8 +1,8 @@
 class VideosController < ApplicationController
-  PER = 12
+  MAX_PER_PAGE= 12
 
   def index
-    @videos = Video.page(params[:page]).per(PER)
+    @videos = Video.page(params[:page]).per(MAX_PER_PAGE)
   end
 
   def show
