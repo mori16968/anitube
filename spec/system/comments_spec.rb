@@ -6,7 +6,7 @@ RSpec.describe "Comments", js: true, type: :system do
 
   before do
     log_in(user)
-    find('#index-post').click
+    find('#logo').click
     find('.thumbnail').click
   end
 

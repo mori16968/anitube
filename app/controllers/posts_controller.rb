@@ -21,7 +21,7 @@ class PostsController < ApplicationController
       pluck(:post_id))
     @popular_posts = Kaminari.paginate_array(@popular_posts).
       page(params[:page]).
-      per(PER)
+      per(MAX_PER_PAGE)
   end
 
   def show
