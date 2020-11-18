@@ -3,17 +3,31 @@ services:
   db:
     image: postgres
     environment:
-      POSTGRES_HOST_AUTH_METHOD: 'trust'
+      POSTGRES_PASSWORD: password
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
-  web:
+  app:
     build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    stdin_open: true
-    tty: true
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
     volumes:
       - .:/myapp
-    ports:
-      - "3000:3000"
+      - public-data:/myapp/public
+      - tmp-data:/myapp/tmp
+      - log-data:/myapp/log
     depends_on:
       - db
+  nginx:
+    build: nginx
+    volumes:
+      - public-data:/myapp/public
+      - tmp-data:/myapp/tmp
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+volumes:
+    public-data:
+    tmp-data:
+    log-data:
+    db-data:
+
